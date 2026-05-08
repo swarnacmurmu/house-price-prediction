@@ -22,6 +22,21 @@ The application is built using Python, XGBoost, and Streamlit.
 
 ---
 
+# 📸 Application Screenshots
+
+## Main Dashboard
+
+![Dashboard](images/dashboard.png)
+
+## Model Comparison
+
+![Model Comparison](images/model_comparison.png)
+
+## Feature Importance
+
+![Feature Importance](images/feature_importance.png)
+
+
 # 🧠 Machine Learning Concepts Used
 
 ## 1. Data Preprocessing
@@ -98,6 +113,8 @@ house-price-prediction/
 │   ├── model_columns.pkl
 │   ├── model_comparison.csv
 │   └── feature_importance.png
+
+'''
 
 
 
