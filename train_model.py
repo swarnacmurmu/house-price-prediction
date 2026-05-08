@@ -5,6 +5,7 @@ import os
 
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from xgboost import XGBRegressor
 from sklearn.ensemble import RandomForestRegressor
 
 # Create model folder if not present
@@ -41,8 +42,10 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # 7. Train model
-model = RandomForestRegressor(
-    n_estimators=200,
+model = XGBRegressor(
+    n_estimators=300,
+    learning_rate=0.05,
+    max_depth=4,
     random_state=42
 )
 
