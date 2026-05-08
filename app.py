@@ -216,3 +216,26 @@ st.markdown("""
 Lower MAE and RMSE indicate better performance, while higher R² score indicates better model fit.
 </p>
 """, unsafe_allow_html=True)
+
+
+
+st.write("---")
+
+st.markdown(
+    '<div class="section-heading">📈 Feature Importance</div>',
+    unsafe_allow_html=True
+)
+
+st.write("")
+
+st.image(
+    "model/feature_importance.png",
+    caption="Top 15 features affecting house price prediction",
+    use_container_width=True
+)
+
+st.markdown("""
+<p style="color:#cbd5e1; font-size:15px; margin-top:15px;">
+Feature importance helps explain which input variables contributed most to the model's predictions.
+</p>
+""", unsafe_allow_html=True)
