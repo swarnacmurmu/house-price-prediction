@@ -154,6 +154,7 @@ with col2:
         <div class="price-card">
             <h2>Estimated Price</h2>
             <div class="price">₹ {prediction_inr:,.0f}</div>
+            <p>Approx. USD Price: ${prediction_usd:,.2f}</p>
             <p>Based on the selected house features</p>
         </div>
         """, unsafe_allow_html=True)
