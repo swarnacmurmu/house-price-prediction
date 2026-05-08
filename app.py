@@ -84,6 +84,19 @@ with st.sidebar:
     full_bath = st.slider("Full Bathrooms", 0, 4, 2)
     year_built = st.number_input("Year Built", 1800, 2026, 2005)
     year_remod_add = st.number_input("Year Remodeled", 1800, 2026, 2010)
+    lot_area = st.number_input("Lot Area", 1000, 50000, 8000)
+    overall_cond = st.slider("Overall Condition", 1, 10, 5)
+    tot_rms_abv_grd = st.slider("Total Rooms Above Ground", 2, 15, 6)
+    neighborhood = st.selectbox("Neighborhood", [
+        "CollgCr", "Veenker", "Crawfor", "NoRidge", "Mitchel",
+        "Somerst", "NWAmes", "OldTown", "BrkSide", "Sawyer",
+        "NridgHt", "NAmes", "SawyerW", "IDOTRR", "MeadowV",
+        "Edwards", "Timber", "Gilbert", "StoneBr", "ClearCr",
+        "NPkVill", "Blmngtn", "BrDale", "SWISU", "Blueste"
+    ])
+    house_style = st.selectbox("House Style", [
+        "1Story", "2Story", "1.5Fin", "SLvl", "SFoyer", "1.5Unf", "2.5Unf", "2.5Fin"
+    ])
 
 input_data = pd.DataFrame(0, index=[0], columns=model_columns)
 
@@ -96,6 +109,16 @@ input_data["1stFlrSF"] = first_flr_sf
 input_data["FullBath"] = full_bath
 input_data["YearBuilt"] = year_built
 input_data["YearRemodAdd"] = year_remod_add
+input_data["LotArea"] = lot_area
+input_data["OverallCond"] = overall_cond
+input_data["TotRmsAbvGrd"] = tot_rms_abv_grd
+neighborhood_col = "Neighborhood_" + neighborhood
+if neighborhood_col in input_data.columns:
+    input_data[neighborhood_col] = 1
+
+house_style_col = "HouseStyle_" + house_style
+if house_style_col in input_data.columns:
+    input_data[house_style_col] = 1
 
 prediction_usd = model.predict(input_data)[0]
 
