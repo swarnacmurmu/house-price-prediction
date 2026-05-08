@@ -87,6 +87,7 @@ with st.sidebar:
     lot_area = st.number_input("Lot Area", 1000, 50000, 8000)
     overall_cond = st.slider("Overall Condition", 1, 10, 5)
     tot_rms_abv_grd = st.slider("Total Rooms Above Ground", 2, 15, 6)
+
     neighborhood = st.selectbox("Neighborhood", [
         "CollgCr", "Veenker", "Crawfor", "NoRidge", "Mitchel",
         "Somerst", "NWAmes", "OldTown", "BrkSide", "Sawyer",
@@ -94,8 +95,10 @@ with st.sidebar:
         "Edwards", "Timber", "Gilbert", "StoneBr", "ClearCr",
         "NPkVill", "Blmngtn", "BrDale", "SWISU", "Blueste"
     ])
+
     house_style = st.selectbox("House Style", [
-        "1Story", "2Story", "1.5Fin", "SLvl", "SFoyer", "1.5Unf", "2.5Unf", "2.5Fin"
+        "1Story", "2Story", "1.5Fin", "SLvl", "SFoyer",
+        "1.5Unf", "2.5Unf", "2.5Fin"
     ])
 
 input_data = pd.DataFrame(0, index=[0], columns=model_columns)
@@ -112,6 +115,7 @@ input_data["YearRemodAdd"] = year_remod_add
 input_data["LotArea"] = lot_area
 input_data["OverallCond"] = overall_cond
 input_data["TotRmsAbvGrd"] = tot_rms_abv_grd
+
 neighborhood_col = "Neighborhood_" + neighborhood
 if neighborhood_col in input_data.columns:
     input_data[neighborhood_col] = 1
@@ -142,6 +146,11 @@ with col1:
         <div class="feature-line">🛁 <b>Bathrooms:</b> {full_bath}</div>
         <div class="feature-line">📅 <b>Year Built:</b> {year_built}</div>
         <div class="feature-line">🔨 <b>Year Remodeled:</b> {year_remod_add}</div>
+        <div class="feature-line">🌳 <b>Lot Area:</b> {lot_area} sq ft</div>
+        <div class="feature-line">⭐ <b>Overall Condition:</b> {overall_cond} / 10</div>
+        <div class="feature-line">🚪 <b>Total Rooms:</b> {tot_rms_abv_grd}</div>
+        <div class="feature-line">📍 <b>Neighborhood:</b> {neighborhood}</div>
+        <div class="feature-line">🏘️ <b>House Style:</b> {house_style}</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -162,7 +171,7 @@ with col2:
                     Based on the selected house features
                 </p>
                 <p style="font-size:13px; color:#374151; margin-top:18px; line-height:1.6;">
-                    Note: This model was trained on the Ames Housing dataset. 
+                    Note: This model was trained on the Ames Housing dataset.
                     INR value is converted from USD using an approximate exchange rate.
                 </p>
             </div>
@@ -171,3 +180,39 @@ with col2:
         )
     else:
         st.info("Click the button to generate prediction.")
+
+st.write("---")
+
+st.markdown('<div class="section-heading">📊 Model Comparison</div>', unsafe_allow_html=True)
+st.write("")
+
+comparison_df = pd.read_csv("model/model_comparison.csv")
+
+comparison_df["MAE"] = comparison_df["MAE"].round(2)
+comparison_df["RMSE"] = comparison_df["RMSE"].round(2)
+comparison_df["R2 Score"] = comparison_df["R2 Score"].round(4)
+
+st.markdown("""
+<div style="
+    # background-color:#f8fafc;
+    # padding:25px;
+    # border-radius:18px;
+    # color:#111827;
+    # box-shadow:0px 8px 25px rgba(0,0,0,0.25);
+    # border-left:7px solid #38bdf8;
+">
+""", unsafe_allow_html=True)
+
+st.dataframe(
+    comparison_df,
+    use_container_width=True,
+    hide_index=True
+)
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+st.markdown("""
+<p style="color:#cbd5e1; font-size:15px; margin-top:15px;">
+Lower MAE and RMSE indicate better performance, while higher R² score indicates better model fit.
+</p>
+""", unsafe_allow_html=True)
