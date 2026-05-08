@@ -150,13 +150,24 @@ with col2:
     st.write("")
 
     if st.button("🔮 Predict House Price", use_container_width=True):
-        st.markdown(f"""
-        <div class="price-card">
-            <h2>Estimated Price</h2>
-            <div class="price">₹ {prediction_inr:,.0f}</div>
-            <p>Approx. USD Price: ${prediction_usd:,.2f}</p>
-            <p>Based on the selected house features</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(
+            f"""
+            <div class="price-card">
+                <h2>Estimated Price</h2>
+                <div class="price">₹ {prediction_inr:,.0f}</div>
+                <p style="font-size:18px; margin-top:10px;">
+                    Approx. USD Price: ${prediction_usd:,.2f}
+                </p>
+                <p style="margin-top:15px;">
+                    Based on the selected house features
+                </p>
+                <p style="font-size:13px; color:#374151; margin-top:18px; line-height:1.6;">
+                    Note: This model was trained on the Ames Housing dataset. 
+                    INR value is converted from USD using an approximate exchange rate.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
     else:
         st.info("Click the button to generate prediction.")
