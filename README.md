@@ -36,6 +36,8 @@ The application is built using Python, XGBoost, and Streamlit.
 
 ![Feature Importance](images/feature_importance.png)
 
+---
+
 
 # 🧠 Machine Learning Concepts Used
 
@@ -114,11 +116,13 @@ house-price-prediction/
 │   ├── model_comparison.csv
 │   └── feature_importance.png
 
-'''
+```
 
 
 
-⚙️ How to Run the Project
+# ⚙️ How to Run the Project
+
+```text
 
 1. Clone Repository
 git clone https://github.com/swarnacmurmu/house-price-prediction.git
@@ -138,9 +142,11 @@ python feature_importance.py
 6. Run Streamlit App
 streamlit run app.py
 
+```
 
-
-📈 Workflow
+# 📈 Workflow
+ 
+```text
 
 Dataset
    ↓
@@ -160,11 +166,13 @@ Feature Importance Visualization
    ↓
 Streamlit Deployment
 
+```
 
-
-💡 Future Improvements
+# 💡 Future Improvements
+```text
 Add real-time API integration
 Add location maps
 Add deep learning model comparison
 Deploy using Docker and AWS
 Add authentication system
+```
